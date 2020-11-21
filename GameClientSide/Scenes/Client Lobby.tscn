@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Client Lobby.gd" type="Script" id=1]
+
+[node name="Client Lobby" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="IP" type="TextEdit" parent="."]
+margin_left = 103.0
+margin_top = 44.0
+margin_right = 387.0
+margin_bottom = 105.0
+rect_pivot_offset = Vector2( 177, 26 )
+text = "169.254.192.30"
+
+[node name="Port" type="TextEdit" parent="."]
+anchor_right = 0.44
+margin_left = 106.0
+margin_top = 130.0
+margin_right = 389.0
+margin_bottom = 195.0
+text = "4242"
+
+[node name="connectButton" type="Button" parent="."]
+margin_left = 113.0
+margin_top = 224.0
+margin_right = 391.0
+margin_bottom = 272.0
+text = "Connect"
+[connection signal="pressed" from="connectButton" to="." method="_on_connectButton_pressed"]
