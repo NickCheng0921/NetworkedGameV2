@@ -1,7 +1,7 @@
 extends Node2D
 
-var openPort = 4242;
-var max_clients = 2;
+var openPort = 44444;
+var max_clients = 4;
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -20,5 +20,6 @@ func _player_connected(id):
 
 func _player_disconnected(id):
 	print("Client ", id, " disconnected")
+	
 #func _process(delta):
 #	pass
