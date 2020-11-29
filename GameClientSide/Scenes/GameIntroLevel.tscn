@@ -5,6 +5,6 @@
 [node name="GameIntroLevel" type="Node2D"]
 
 [node name="icon" type="Sprite" parent="."]
-position = Vector2( 485.63, 265.571 )
+position = Vector2( 192.402, 76.9208 )
 scale = Vector2( 5.93413, 2.21751 )
 texture = ExtResource( 1 )

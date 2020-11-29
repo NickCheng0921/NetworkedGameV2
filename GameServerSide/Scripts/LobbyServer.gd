@@ -15,25 +15,33 @@ func _ready():
 
 func displayServerInfo():
 	print("IP: ", IP.get_local_addresses()[1])
-	print("Port: ", openPort)
+	print("Port: ", openPort, '\n')
 	
 func _player_connected(id):
 	print("Player ", id, " connected to server")
 	ready_players.append(id)
 	#start game once a player connects
-	rpc_id(id, "pre_start_game")
-	print("RPC to pre start sent")
+	if ready_players.size() == 1:
+		pre_start_game()
 	
 func _player_disconnected(id):
 	print("Client ", id, " disconnected")
 	
-#func pre_start_game():
-	#load game and spawn players on server side before giving clients command of respective player
-	#var world = load("res://Scenes/GameIntroLevel.tscn").instance()
-	#get_tree().get_root().add_child(world)
+func pre_start_game():
+	#load game and spawn players locally before doing it over network for players
+	var world = load("res://Scenes/GameIntroLevel.tscn").instance()
+	get_tree().get_root().add_child(world)
 	#spawn players
+	for id in ready_players:
+		get_node("/root/GameIntroLevel").spawn_player(Vector2(0,0), id)
 		
-	#rpc("pre_start_game")
+	rpc("pre_start_game")
 	
-#remote func post_start_game():
-#	print("Player ", get_tree().get_rpc_sender_id(), " is ready")
+remote func post_start_game():
+	print("Player ", get_tree().get_rpc_sender_id(), " loaded world")
+	var caller_id = get_tree().get_rpc_sender_id()
+	var world = get_node("/root/GameIntroLevel")
+	
+	for player in ready_players:
+		#world.rpc_id(player, "spawn_player", Vector2(0,0), player.get_network_master())
+		print("RPC load ", player)
