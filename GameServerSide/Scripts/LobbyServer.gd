@@ -20,7 +20,7 @@ func displayServerInfo():
 func _player_connected(id):
 	print("Player ", id, " connected to server")
 	ready_players.append(id)
-	#start game once a player connects
+	#start game once 1 players connect
 	if ready_players.size() == 1:
 		pre_start_game()
 	
@@ -32,9 +32,12 @@ func pre_start_game():
 	var world = load("res://Scenes/GameIntroLevel.tscn").instance()
 	get_tree().get_root().add_child(world)
 	#spawn players
+	var spawn_pos = Vector2(500, 300)
 	for id in ready_players:
-		get_node("/root/GameIntroLevel").spawn_player(Vector2(0,0), id)
+		print("Spawning player ", id, " at ", spawn_pos.x, ' ', spawn_pos.y)
+		get_node("/root/GameIntroLevel").spawn_player(spawn_pos, id)
 		
+	print("\n")
 	rpc("pre_start_game")
 	
 remote func post_start_game():
@@ -42,6 +45,6 @@ remote func post_start_game():
 	var caller_id = get_tree().get_rpc_sender_id()
 	var world = get_node("/root/GameIntroLevel")
 	
-	for player in ready_players:
-		#world.rpc_id(player, "spawn_player", Vector2(0,0), player.get_network_master())
-		print("RPC load ", player)
+	for id in ready_players:
+		print("RPC load ", id)
+		rpc_id(id, "spawn_player", Vector2(500, 300), id)

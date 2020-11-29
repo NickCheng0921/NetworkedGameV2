@@ -3,7 +3,7 @@ extends KinematicBody2D
 const MOVE_SPEED = 300
 var velocity = Vector2()
 
-puppet var puppet_pos
+puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
 
 # Called when the node enters the scene tree for the first time.
@@ -16,13 +16,13 @@ func _process(delta):
 	if is_network_master():
 		var move_direction = Vector2()
 		
-		if Input.is_action_pressed("move_up"):
+		if Input.is_action_pressed("ui_up"):
 			move_direction.y -= 1
-		if Input.is_action_pressed("move_down"):
+		if Input.is_action_pressed("ui_down"):
 			move_direction.y += 1
-		if Input.is_action_pressed("move_left"):
+		if Input.is_action_pressed("ui_left"):
 			move_direction.x -= 1
-		if Input.is_action_pressed("move_right"):
+		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
 		velocity = move_direction.normalized()*MOVE_SPEED
 		

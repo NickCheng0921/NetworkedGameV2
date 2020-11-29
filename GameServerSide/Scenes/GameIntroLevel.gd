@@ -7,4 +7,5 @@ func spawn_player(spawn_pos, id):
 	player.position = spawn_pos
 	player.name = String(id)
 	player.set_network_master(id)
+	get_node("/root/GameIntroLevel").add_child(player)
 	print("Player spawned")

@@ -3,6 +3,7 @@ extends Node2D
 const connectIP = "34.94.217.163"
 #const connectIP = "127.0.0.1"
 const connectPort = 44444;
+var Player = load("res://Scenes/Player.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -33,3 +34,13 @@ puppet func pre_start_game():
 	get_tree().get_root().add_child(world)
 	
 	rpc_id(1, "post_start_game")
+
+
+puppet func spawn_player(spawn_pos, id):
+	print("Spawning a player")
+	var player = Player.instance()
+	
+	player.position = spawn_pos
+	player.name = String(id)
+	player.set_network_master(id)
+	get_node("/root/GameIntroLevel").add_child(player)
