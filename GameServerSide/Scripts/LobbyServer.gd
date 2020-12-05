@@ -14,7 +14,7 @@ func _ready():
 	get_tree().set_network_peer(server)
 
 func displayServerInfo():
-	print("1. Port: ", openPort)
+	print("1. Server up on port: ", openPort)
 	
 func _player_connected(id):
 	print("    P", id, " connected to server")
@@ -38,14 +38,14 @@ func pre_start_game():
 		print("    Spawning player ", id, " at ", spawn_pos.x, ' ', spawn_pos.y)
 		get_node("/root/GameIntroLevel").spawn_player(spawn_pos, id)
 		
-	rpc("pre_start_game")
+	for id in ready_players:
+		rpc_id(id, "pre_start_game")
 	print("3. Wait for players to set up game")
 	
 remote func post_start_game():
-	print("    P", get_tree().get_rpc_sender_id(), " loaded map")
 	var caller_id = get_tree().get_rpc_sender_id()
-	var world = get_node("/root/GameIntroLevel")
+	print("    P", caller_id, " loaded map")
 	
 	for id in ready_players:
-		print("    RPC load ", id)
+		print("        RPC load ", id)
 		rpc_id( caller_id, "spawn_player", Vector2(500, 300), id )
