@@ -37,10 +37,17 @@ puppet func pre_start_game():
 
 
 puppet func spawn_player(spawn_pos, id):
-	print("Spawning a player")
+	print("Spawning a player ", id)
 	var player = Player.instance()
 	
 	player.position = spawn_pos
 	player.name = String(id)
 	player.set_network_master(id)
+	
+	if(id == get_tree().get_network_unique_id()):
+		var camera = Camera2D.new()
+		camera.make_current()
+		camera.set_limit_smoothing_enabled(100)
+		player.add_child(camera)
+	
 	get_node("/root/GameIntroLevel").add_child(player)
