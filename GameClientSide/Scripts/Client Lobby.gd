@@ -6,6 +6,7 @@ const connectPort = 44444;
 var Player = load("res://Scenes/Player.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#Git commits
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
