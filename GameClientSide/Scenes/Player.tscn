@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/soldier.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Light.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Light2.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 22.226
