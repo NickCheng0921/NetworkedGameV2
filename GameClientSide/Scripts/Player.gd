@@ -2,16 +2,25 @@ extends KinematicBody2D
 
 const MOVE_SPEED = 300
 var velocity = Vector2()
+var isGreen = false
+var hitCounter = 0
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
 puppet var look_dir = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if(isGreen):
+		hitCounter += 1
+		if(hitCounter > 40):
+			hitCounter = 0
+			modulate = Color(0, 255, 0)
+			isGreen = false
 	#only move if we're the master of this player
 	if is_network_master():
 		var move_direction = Vector2()
@@ -25,6 +34,8 @@ func _process(delta):
 			move_direction.x -= 1
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
+		if Input.is_action_just_pressed("ui_shoot"):
+			rpc_id(1, "player_shoot")
 		velocity = move_direction.normalized()*MOVE_SPEED
 		#aim at mouse
 		look_dir = atan2(look_vec.y, look_vec.x)
@@ -44,3 +55,7 @@ func _process(delta):
 	if not is_network_master():
 		puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
 		look_dir = global_rotation
+
+remote func take_damage():
+	isGreen = true
+	modulate = Color(255,0,0)
