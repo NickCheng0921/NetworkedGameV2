@@ -17,9 +17,9 @@ func _ready():
 func _process(delta):
 	if(isGreen):
 		hitCounter += 1
-		if(hitCounter > 40):
+		if(hitCounter > 5):
 			hitCounter = 0
-			modulate = Color(0, 255, 0)
+			modulate = Color(0, 0, 0, 1)
 			isGreen = false
 	#only move if we're the master of this player
 	if is_network_master():
