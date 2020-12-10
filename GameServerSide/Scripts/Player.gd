@@ -21,7 +21,10 @@ func _process(delta):
 	velocity = puppet_vel
 	global_rotation = look_dir
 	
-	position += velocity * delta
+	#position += velocity * delta
+	var collision = move_and_collide(velocity*delta)
+	if collision:
+		print("HIT")
 	
 	puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
 	look_dir = global_rotation
