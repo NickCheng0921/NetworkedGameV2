@@ -37,6 +37,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("ui_shoot"):
 			rpc_id(1, "player_shoot")
 		velocity = move_direction.normalized()*MOVE_SPEED
+		
 		#aim at mouse
 		look_dir = atan2(look_vec.y, look_vec.x)
 		global_rotation = look_dir
@@ -50,7 +51,8 @@ func _process(delta):
 		velocity = puppet_vel
 		global_rotation = look_dir
 	
-	position += velocity * delta
+	#position += velocity * delta
+	move_and_collide(velocity*delta)
 	
 	if not is_network_master():
 		puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
