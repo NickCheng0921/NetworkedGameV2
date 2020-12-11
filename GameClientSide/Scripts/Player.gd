@@ -1,13 +1,18 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 300
+const MOVE_SPEED = 350
 var velocity = Vector2()
 var isGreen = false
 var hitCounter = 0
+var maxHealth = 3
+var canShoot = true
+var isDead = false
+var deadTimer = 0
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
 puppet var look_dir = 0
+puppet var currHealth = maxHealth
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +26,15 @@ func _process(delta):
 			hitCounter = 0
 			modulate = Color(0, 0, 0, 1)
 			isGreen = false
+	if(isDead):
+		deadTimer += 1
+		if(deadTimer > 60):
+			position.x = 500
+			position.y = 300
+			deadTimer = 0
+			isDead = false
+			currHealth = maxHealth
+			show()
 	#only move if we're the master of this player
 	if is_network_master():
 		var move_direction = Vector2()
@@ -51,7 +65,6 @@ func _process(delta):
 		velocity = puppet_vel
 		global_rotation = look_dir
 	
-	#position += velocity * delta
 	move_and_collide(velocity*delta)
 	
 	if not is_network_master():
@@ -59,5 +72,12 @@ func _process(delta):
 		look_dir = global_rotation
 
 remote func take_damage():
-	isGreen = true
-	modulate = Color(255,0,0)
+	if not isDead:
+		isGreen = true
+		modulate = Color(255,0,0)
+		currHealth -= 1 #for now each shot will do 1 damage
+		
+		if(currHealth <= 0):
+			canShoot = false
+			isDead = true
+			hide()

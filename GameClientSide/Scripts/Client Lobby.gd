@@ -1,7 +1,7 @@
 extends Node2D
 
-#const connectIP = "34.94.217.163"
-const connectIP = "127.0.0.1"
+const connectIP = "34.94.217.163"
+#const connectIP = "127.0.0.1"
 const connectPort = 44444;
 var Player = load("res://Scenes/Player.tscn")
 # Called when the node enters the scene tree for the first time.
