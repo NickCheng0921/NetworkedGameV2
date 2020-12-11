@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 300
+const MOVE_SPEED = 450
 var velocity = Vector2()
 onready var shootRayCast = $shootRayCast
 var shootCollision
