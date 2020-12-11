@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 350
+const MOVE_SPEED = 450
 var velocity = Vector2()
 var isGreen = false
 var hitCounter = 0
