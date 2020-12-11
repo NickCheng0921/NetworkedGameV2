@@ -20,7 +20,7 @@ func _player_connected(id):
 	print("    P", id, " connected to server")
 	ready_players.append(id)
 	#start game once 2 players connect
-	if ready_players.size() == 2:
+	if ready_players.size() == 1:
 		pre_start_game()
 	
 func _player_disconnected(id):

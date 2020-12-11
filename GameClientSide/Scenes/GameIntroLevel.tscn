@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/GameIntroLevel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/mapTileSet.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/foothill space station.PNG" type="Texture" id=3]
 [ext_resource path="res://Sprites/soldier.png" type="Texture" id=4]
+
+[sub_resource type="OccluderPolygon2D" id=7]
+polygon = PoolVector2Array( 32, 16, 0, 16, 0, 15.4043, 32, 15.4043 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
@@ -33,6 +36,7 @@ points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 1/region = Rect2( 0, 48, 32, 16 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
+1/occluder = SubResource( 7 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )

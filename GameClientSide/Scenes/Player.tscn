@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/soldier.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Light2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/lightwide.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 22.226
@@ -18,8 +19,17 @@ offset = Vector2( 12, 0 )
 shape = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 312, -6 )
-scale = Vector2( 0.749021, 0.889234 )
+position = Vector2( 1.61845, 1.08706 )
+scale = Vector2( 0.415261, 0.491567 )
 texture = ExtResource( 3 )
+offset = Vector2( 800, 0 )
+texture_scale = 2.0
 mode = 2
+shadow_enabled = true
+
+[node name="Light2D2" type="Light2D" parent="."]
+visible = false
+position = Vector2( -0.97229, -2.36922 )
+scale = Vector2( 0.0900153, 0.10875 )
+texture = ExtResource( 4 )
 shadow_enabled = true
