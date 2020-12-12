@@ -4,6 +4,7 @@ extends Node2D
 const connectIP = "127.0.0.1"
 const connectPort = 44444;
 var Player = load("res://Scenes/Player.tscn")
+var Creature = load("res://Scenes/Creature.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -51,3 +52,20 @@ puppet func spawn_player(spawn_pos, id):
 		player.add_child(camera)
 	
 	get_node("/root/GameIntroLevel").add_child(player)
+
+puppet func spawn_creature(spawn_pos, id):
+	print("Spawning a creature ", id)
+	var creature = Creature.instance()
+	
+	creature.position = spawn_pos
+	creature.name = String(id)
+	creature.set_network_master(id)
+	
+	if(id == get_tree().get_network_unique_id()):
+		get_node("/root/GameIntroLevel/black background").hide()
+		var camera = Camera2D.new()
+		camera.make_current()
+		camera.set_limit_smoothing_enabled(100)
+		creature.add_child(camera)
+	
+	get_node("/root/GameIntroLevel").add_child(creature)

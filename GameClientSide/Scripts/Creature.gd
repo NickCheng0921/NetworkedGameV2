@@ -1,14 +1,14 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 450
+const MOVE_SPEED = 600
 var velocity = Vector2()
 var isGreen = false
 var hitCounter = 0
-export var maxHealth = 8
+export var maxHealth = 2
 var canShoot = true
 var isDead = false
 var deadTimer = 0
-export var bulletDamage = 1 #this is the damage we take on a hit
+export var meleeDamage = 1 #this is the damage we take on a hit
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
@@ -30,8 +30,8 @@ func _process(delta):
 	if(isDead):
 		deadTimer += 1
 		if(deadTimer > 60):
-			position.x = 500
-			position.y = 300
+			position.x = 1000
+			position.y = 1000
 			deadTimer = 0
 			isDead = false
 			currHealth = maxHealth
@@ -50,7 +50,7 @@ func _process(delta):
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
 		if Input.is_action_just_pressed("ui_shoot"):
-			rpc_id(1, "player_shoot")
+			rpc_id(1, "creature_swipe")
 		velocity = move_direction.normalized()*MOVE_SPEED
 		
 		#aim at mouse
@@ -76,10 +76,10 @@ remote func take_damage():
 	if not isDead:
 		isGreen = true
 		modulate = Color(255,0,0)
-		currHealth -= bulletDamage
+		currHealth -= meleeDamage
 		
 		if(currHealth <= 0):
-			rpc_id(1, "player_died")
+			rpc_id(1, "creature_died")
 			canShoot = false
 			isDead = true
 			hide()

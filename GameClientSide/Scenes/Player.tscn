@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/soldier.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Light2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Light.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/lightwide.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -24,6 +24,7 @@ scale = Vector2( 0.415261, 0.491567 )
 texture = ExtResource( 3 )
 offset = Vector2( 800, 0 )
 texture_scale = 2.0
+color = Color( 1, 1, 1, 0.619608 )
 mode = 2
 shadow_enabled = true
 

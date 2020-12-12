@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 450
+const MOVE_SPEED = 600
 var velocity = Vector2()
-onready var shootRayCast = $shootRayCast
-var shootCollision
+onready var attackRayCast = $attackRayCast
+var attackCollision
 var sender_id = 0
-var maxHealth = 8
+var maxHealth = 2
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
@@ -28,9 +28,9 @@ func _process(delta):
 	puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
 	look_dir = global_rotation
 
-remote func player_shoot():
+remote func creature_swipe():
 	sender_id = get_tree().get_rpc_sender_id()  
-	if shootRayCast.is_colliding() != false:
-		shootCollision = shootRayCast.get_collider()
-		print("P", sender_id, " hit ", shootCollision.get_name())
-		shootCollision.rpc("take_damage")
+	if attackRayCast.is_colliding() != false:
+		attackCollision = attackRayCast.get_collider()
+		print("C", sender_id, " hit ", attackCollision.get_name())
+		attackCollision.rpc("take_damage")
