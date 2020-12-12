@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 600
+const MOVE_SPEED = 550
 var velocity = Vector2()
 var isGreen = false
 var hitCounter = 0
 export var maxHealth = 2
 var canShoot = true
+var canMove = true
 var isDead = false
 var deadTimer = 0
 export var meleeDamage = 1 #this is the damage we take on a hit
@@ -23,19 +24,10 @@ func _ready():
 func _process(delta):
 	if(isGreen):
 		hitCounter += 1
-		if(hitCounter > 5):
+		if(hitCounter > 10):
 			hitCounter = 0
-			modulate = Color(0, 0, 0, 1)
+			modulate = Color(255, 0, 0)
 			isGreen = false
-	if(isDead):
-		deadTimer += 1
-		if(deadTimer > 60):
-			position.x = 1000
-			position.y = 1000
-			deadTimer = 0
-			isDead = false
-			currHealth = maxHealth
-			show()
 	#only move if we're the master of this player
 	if is_network_master():
 		var move_direction = Vector2()
@@ -50,8 +42,12 @@ func _process(delta):
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
 		if Input.is_action_just_pressed("ui_shoot"):
-			rpc_id(1, "creature_swipe")
-		velocity = move_direction.normalized()*MOVE_SPEED
+			rpc_unreliable_id(1, "creature_swipe")
+		if(canMove):
+			velocity = move_direction.normalized()*MOVE_SPEED
+		else:
+			velocity.x = 0
+			velocity.y = 0
 		
 		#aim at mouse
 		look_dir = atan2(look_vec.y, look_vec.x)
@@ -75,11 +71,21 @@ func _process(delta):
 remote func take_damage():
 	if not isDead:
 		isGreen = true
-		modulate = Color(255,0,0)
+		modulate = Color(0,255,0)
 		currHealth -= meleeDamage
 		
 		if(currHealth <= 0):
 			rpc_id(1, "creature_died")
 			canShoot = false
+			canMove = false
 			isDead = true
 			hide()
+
+remote func creature_respawn(respawn_pos):
+	print("Creature Respawned")
+	currHealth = maxHealth
+	position = respawn_pos
+	canMove = true
+	canShoot = true
+	isDead = false
+	show()

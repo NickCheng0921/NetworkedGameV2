@@ -16,7 +16,6 @@ puppet var currHealth = maxHealth
 func _ready():
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#no network master check because server owns no players
 	position = puppet_pos
@@ -34,3 +33,20 @@ remote func player_shoot():
 		shootCollision = shootRayCast.get_collider()
 		print("P", sender_id, " hit ", shootCollision.get_name())
 		shootCollision.rpc("take_damage")
+		
+remote func player_died():
+	print("------------------\nCreature Won\n------------------")
+	var respawnTimer = Timer.new()
+	respawnTimer.autostart = true
+	respawnTimer.set_one_shot(true)
+	respawnTimer.wait_time = 10
+	add_child(respawnTimer)
+	respawnTimer.connect("timeout", self, "_respawnTimeout")
+
+func _respawnTimeout():
+	print("Respawn Player")
+	var respawn_pos = Vector2()
+	respawn_pos.x = 500
+	respawn_pos.y = 300
+	currHealth = maxHealth
+	rpc("player_respawn", respawn_pos)

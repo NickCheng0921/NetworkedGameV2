@@ -19,12 +19,3 @@ func spawn_creature(spawn_pos, id):
 	creature.set_network_master(id)
 	get_node("/root/GameIntroLevel").add_child(creature)
 	print("    Creature spawned")
-
-func creature_died():
-	creatureDeaths += 1
-	if(creatureDeaths > 3): #end game with player win 
-		print("Player Won")
-		creatureDeaths = 0
-
-func player_died():
-	print("Creature Won")

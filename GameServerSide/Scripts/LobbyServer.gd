@@ -32,16 +32,14 @@ func pre_start_game():
 	var world = load("res://Scenes/GameIntroLevel.tscn").instance()
 	get_tree().get_root().add_child(world)
 	#spawn players
-	var spawn_pos = Vector2(500, 300)
+	var spawn_pos1 = Vector2(500, 300)
+	var spawn_pos2 = Vector2(1000, 1000)
 	#first player to connect is creature
 	if(ready_players.size() == 1):
-		print("    Spawning creature ", ready_players[0], " at ", spawn_pos.x, ' ', spawn_pos.y)
-		get_node("/root/GameIntroLevel").spawn_creature(spawn_pos, ready_players[0])
+		get_node("/root/GameIntroLevel").spawn_creature(spawn_pos2, ready_players[0])
 	if(ready_players.size() == 2):
-		print("    Spawning creature ", ready_players[0], " at ", spawn_pos.x, ' ', spawn_pos.y)
-		get_node("/root/GameIntroLevel").spawn_creature(spawn_pos, ready_players[0])
-		print("    Spawning player ", ready_players[1], " at ", spawn_pos.x, ' ', spawn_pos.y)
-		get_node("/root/GameIntroLevel").spawn_player(spawn_pos, ready_players[1])
+		get_node("/root/GameIntroLevel").spawn_creature(spawn_pos2, ready_players[0])
+		get_node("/root/GameIntroLevel").spawn_player(spawn_pos1, ready_players[1])
 		
 	for id in ready_players:
 		rpc_id(id, "pre_start_game")
@@ -54,7 +52,7 @@ remote func post_start_game():
 	#	print("        RPC load ", id)
 	#	rpc_id( caller_id, "spawn_player", Vector2(500, 300), id )
 	if(ready_players.size() == 1):
-		rpc_id( caller_id, "spawn_creature", Vector2(500, 300), ready_players[0] )
+		rpc_id( caller_id, "spawn_creature", Vector2(1000, 1000), ready_players[0] )
 	if(ready_players.size() == 2):
-		rpc_id( caller_id, "spawn_creature", Vector2(500, 300), ready_players[0] )
+		rpc_id( caller_id, "spawn_creature", Vector2(1000, 1000), ready_players[0] )
 		rpc_id( caller_id, "spawn_player", Vector2(500, 300), ready_players[1] )
