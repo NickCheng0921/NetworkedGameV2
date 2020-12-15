@@ -25,6 +25,7 @@ func _player_connected(id):
 	
 func _player_disconnected(id):
 	print("Client ", id, " disconnected")
+	ready_players.erase(id)
 	
 func pre_start_game():
 	print("2. Load map and spawn players locally")
@@ -34,7 +35,7 @@ func pre_start_game():
 	#spawn players
 	var spawn_pos1 = Vector2(500, 300)
 	var spawn_pos2 = Vector2(1000, 1000)
-	#first player to connect is creature
+	#right now, spawning is hard coded, make it through loop in future
 	if(ready_players.size() == 1):
 		get_node("/root/GameIntroLevel").spawn_player(spawn_pos2, ready_players[0])
 	if(ready_players.size() == 2):
