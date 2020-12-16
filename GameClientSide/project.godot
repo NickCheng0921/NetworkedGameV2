@@ -19,6 +19,10 @@ config/name="NetworkedGameV2.Client"
 run/main_scene="res://Scenes/Client Lobby.tscn"
 config/icon="res://Sprites/icon.png"
 
+[autoload]
+
+Gamestate="*res://Scripts/gamestate.gd"
+
 [input]
 
 ui_left={
