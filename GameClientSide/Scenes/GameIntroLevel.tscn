@@ -503,7 +503,8 @@ shape = SubResource( 19 )
 
 [node name="lock" type="Sprite" parent="."]
 modulate = Color( 0.972549, 0, 0, 1 )
-position = Vector2( 1425.52, 143.394 )
+position = Vector2( -3072.1, 656.415 )
+scale = Vector2( 1, 4.53553 )
 texture = ExtResource( 4 )
 script = ExtResource( 6 )
 
