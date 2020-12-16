@@ -89,3 +89,9 @@ remote func player_respawn(respawn_pos):
 	canShoot = true
 	isDead = false
 	show()
+
+
+func _on_Area2D_area_entered(area):
+	if area.is_in_group("Keys"):
+		Gamestate.numkeys = Gamestate.numkeys + 1
+		area.get_parent().queue_free()
