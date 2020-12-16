@@ -7,6 +7,7 @@ var attackCollision
 var sender_id = 0
 var maxHealth = 2
 var creatureDeaths = 0
+export var numSpawns = 5
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
@@ -38,7 +39,7 @@ remote func creature_swipe():
 
 remote func creature_died():
 	creatureDeaths += 1
-	if(creatureDeaths > 2): #player wins on 3 creature kills
+	if(creatureDeaths >= 3): #player wins on 3 creature kills
 		print("------------------\nPlayer Won\n------------------")
 		creatureDeaths = 0
 	#create timer for respawn
@@ -51,8 +52,6 @@ remote func creature_died():
 
 func _respawnTimeout():
 	print("Respawn Creature")
-	var respawn_pos = Vector2()
-	respawn_pos.x = 1000
-	respawn_pos.y = 1000
+	var respawn_pos = get_node("/root/GameIntroLevel/creatureRespawns/pos" + str((randi() % numSpawns) + 1)).position
 	currHealth = maxHealth
 	rpc("creature_respawn", respawn_pos)

@@ -4,8 +4,8 @@
 [ext_resource path="res://Sprites/mapTileSet.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/foothill space station.PNG" type="Texture" id=3]
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/a7o2dg5k.bmp" type="Texture" id=5]
-[ext_resource path="res://Scenes/key.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/a7o2dg5k.bmp" type="Texture" id=5]
+[ext_resource path="res://Scripts/key.gd" type="Script" id=6]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )

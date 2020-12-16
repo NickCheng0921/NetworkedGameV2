@@ -79,6 +79,7 @@ remote func take_damage():
 			canShoot = false
 			canMove = false
 			isDead = true
+			get_node("CollisionShape2D").disabled = true
 			hide()
 
 remote func creature_respawn(respawn_pos):
@@ -87,5 +88,6 @@ remote func creature_respawn(respawn_pos):
 	position = respawn_pos
 	canMove = true
 	canShoot = true
+	get_node("CollisionShape2D").disabled = false
 	isDead = false
 	show()
