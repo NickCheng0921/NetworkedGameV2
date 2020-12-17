@@ -6,6 +6,7 @@ var isGreen = false
 var hitCounter = 0
 export var maxHealth = 2
 var canShoot = true
+export var swipeCooldown = 0.4
 var canMove = true
 var isDead = false
 var deadTimer = 0
@@ -15,10 +16,10 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
 puppet var look_dir = 0
 puppet var currHealth = maxHealth
-
+puppet var arrowDirection = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	modulate = Color(255,0,0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,8 +42,10 @@ func _process(delta):
 			move_direction.x -= 1
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
-		if Input.is_action_just_pressed("ui_shoot"):
+		if Input.is_action_just_pressed("ui_shoot") and canShoot:
 			rpc_unreliable_id(1, "creature_swipe")
+			swipe_cooldown()
+			canShoot = false
 		if(canMove):
 			velocity = move_direction.normalized()*MOVE_SPEED
 		else:
@@ -63,11 +66,22 @@ func _process(delta):
 		global_rotation = look_dir
 	
 	move_and_collide(velocity*delta)
-	
+	get_node("hintArrow").rotation = arrowDirection
 	if not is_network_master():
 		puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
 		look_dir = global_rotation
 
+func swipe_cooldown():
+	var swipeCooldownTimer = Timer.new()
+	swipeCooldownTimer.autostart = true
+	swipeCooldownTimer.set_one_shot(true)
+	swipeCooldownTimer.wait_time = swipeCooldown
+	add_child(swipeCooldownTimer)
+	swipeCooldownTimer.connect("timeout", self, "_swipeCooldownTimeout")
+	
+func _swipeCooldownTimeout():
+	canShoot = true
+	
 remote func take_damage():
 	if not isDead:
 		isGreen = true

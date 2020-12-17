@@ -6,6 +6,7 @@ var isGreen = false
 var hitCounter = 0
 export var maxHealth = 8
 var canShoot = true
+export var shootCooldown = .3
 var canMove = true
 var isDead = false
 var deadTimer = 0
@@ -41,8 +42,10 @@ func _process(delta):
 			move_direction.x -= 1
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
-		if Input.is_action_just_pressed("ui_shoot"):
+		if Input.is_action_just_pressed("ui_shoot") and canShoot:
 			rpc_unreliable_id(1, "player_shoot")
+			shoot_cooldown()
+			canShoot = false
 		if(canMove):
 			velocity = move_direction.normalized()*MOVE_SPEED
 		else:
@@ -68,6 +71,17 @@ func _process(delta):
 		puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
 		look_dir = global_rotation
 
+func shoot_cooldown():
+	var shootCooldownTimer = Timer.new()
+	shootCooldownTimer.autostart = true
+	shootCooldownTimer.set_one_shot(true)
+	shootCooldownTimer.wait_time = shootCooldown
+	add_child(shootCooldownTimer)
+	shootCooldownTimer.connect("timeout", self, "_shootCooldownTimeout")
+	
+func _shootCooldownTimeout():
+	canShoot = true
+	
 remote func take_damage():
 	if not isDead:
 		isGreen = true
@@ -89,7 +103,6 @@ remote func player_respawn(respawn_pos):
 	canShoot = true
 	isDead = false
 	show()
-
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Keys"):

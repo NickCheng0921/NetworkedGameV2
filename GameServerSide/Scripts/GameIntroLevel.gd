@@ -9,7 +9,7 @@ func spawn_player(spawn_pos, id):
 	player.position = spawn_pos
 	player.name = String(id)
 	player.set_network_master(id)
-	get_node("/root/GameIntroLevel").add_child(player)
+	get_node("/root/GameIntroLevel/humans").add_child(player)
 	print("    Player spawned")
 
 func spawn_creature(spawn_pos, id):
@@ -17,5 +17,5 @@ func spawn_creature(spawn_pos, id):
 	creature.position = spawn_pos
 	creature.name = String(id)
 	creature.set_network_master(id)
-	get_node("/root/GameIntroLevel").add_child(creature)
+	get_node("/root/GameIntroLevel/creatures").add_child(creature)
 	print("    Creature spawned")

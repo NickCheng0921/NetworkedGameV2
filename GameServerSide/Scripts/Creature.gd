@@ -13,6 +13,7 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
 puppet var look_dir = 0
 puppet var currHealth = maxHealth
+puppet var arrowDirection = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +22,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#no network master check because server owns no players
+	arrowDirection = 0
 	position = puppet_pos
 	velocity = puppet_vel
 	global_rotation = look_dir

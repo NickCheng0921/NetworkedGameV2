@@ -1,7 +1,7 @@
 extends Node2D
 
-const connectIP = "34.94.217.163"
-#const connectIP = "127.0.0.1"
+#const connectIP = "34.94.217.163"
+const connectIP = "127.0.0.1"
 const connectPort = 44444;
 var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
@@ -51,7 +51,7 @@ puppet func spawn_player(spawn_pos, id):
 		camera.set_limit_smoothing_enabled(100)
 		player.add_child(camera)
 	
-	get_node("/root/GameIntroLevel").add_child(player)
+	get_node("/root/GameIntroLevel/humans").add_child(player)
 
 puppet func spawn_creature(spawn_pos, id):
 	print("Spawning a creature ", id)
@@ -68,4 +68,4 @@ puppet func spawn_creature(spawn_pos, id):
 		camera.set_limit_smoothing_enabled(100)
 		creature.add_child(camera)
 	
-	get_node("/root/GameIntroLevel").add_child(creature)
+	get_node("/root/GameIntroLevel/creatures").add_child(creature)
