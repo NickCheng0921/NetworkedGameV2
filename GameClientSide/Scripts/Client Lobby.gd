@@ -1,10 +1,12 @@
 extends Node2D
 
-#const connectIP = "34.94.217.163"
-const connectIP = "127.0.0.1"
+const connectIP = "34.94.217.163"
+#const connectIP = "127.0.0.1"
 const connectPort = 44444;
 var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
+var level #used for removing and changing maps
+var victoryScreen = load("res://Scenes/victoryScreen.tscn").instance()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -33,7 +35,7 @@ puppet func pre_start_game():
 	get_node("/root/Lobby").hide()
 	var world = load("res://Scenes/GameIntroLevel.tscn").instance()
 	get_tree().get_root().add_child(world)
-	
+	level = get_node("/root/GameIntroLevel")
 	rpc_id(1, "post_start_game")
 
 
@@ -69,3 +71,12 @@ puppet func spawn_creature(spawn_pos, id):
 		creature.add_child(camera)
 	
 	get_node("/root/GameIntroLevel/creatures").add_child(creature)
+
+remote func gameOver(winCode):
+	level.free()
+	rpc("localLevelDeleted") #tell server we deleted level
+	get_tree().get_root().add_child(victoryScreen)
+	if(winCode == 'c'): #switch statement not yet in Godot?
+		get_node("/root/victoryScreen/whoWon").add_text("Creatures Won")
+	if(winCode == 'h'):
+		get_node("/root/victoryScreen/whoWon").add_text("Humans Won")

@@ -5,7 +5,7 @@ var velocity = Vector2()
 onready var attackRayCast = $attackRayCast
 var attackCollision
 var sender_id = 0
-var maxHealth = 2
+export var maxHealth = 2
 var creatureDeaths = 0
 export var numSpawns = 5
 
@@ -17,11 +17,10 @@ puppet var arrowDirection = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#no network master check because server owns no players
 	arrowDirection = 0
 	position = puppet_pos
 	velocity = puppet_vel
@@ -44,13 +43,15 @@ remote func creature_died():
 	if(creatureDeaths >= 3): #player wins on 3 creature kills
 		print("------------------\nPlayer Won\n------------------")
 		creatureDeaths = 0
+		get_node("/root/Lobby").gameOver('h')
 	#create timer for respawn
-	var respawnTimer = Timer.new()
-	respawnTimer.autostart = true
-	respawnTimer.set_one_shot(true)
-	respawnTimer.wait_time = 1.5
-	add_child(respawnTimer)
-	respawnTimer.connect("timeout", self, "_respawnTimeout")
+	else:
+		var respawnTimer = Timer.new()
+		respawnTimer.autostart = true
+		respawnTimer.set_one_shot(true)
+		respawnTimer.wait_time = 1.5
+		add_child(respawnTimer)
+		respawnTimer.connect("timeout", self, "_respawnTimeout")
 
 func _respawnTimeout():
 	print("Respawn Creature")

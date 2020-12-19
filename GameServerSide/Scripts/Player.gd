@@ -5,7 +5,8 @@ var velocity = Vector2()
 onready var shootRayCast = $shootRayCast
 var shootCollision
 var sender_id = 0
-var maxHealth = 8
+export var maxHealth = 8
+export var canRespawn = false
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
@@ -36,12 +37,14 @@ remote func player_shoot():
 		
 remote func player_died():
 	print("------------------\nCreature Won\n------------------")
-	var respawnTimer = Timer.new()
-	respawnTimer.autostart = true
-	respawnTimer.set_one_shot(true)
-	respawnTimer.wait_time = 10
-	add_child(respawnTimer)
-	respawnTimer.connect("timeout", self, "_respawnTimeout")
+	get_node("/root/Lobby").gameOver('c')
+	if canRespawn:
+		var respawnTimer = Timer.new()
+		respawnTimer.autostart = true
+		respawnTimer.set_one_shot(true)
+		respawnTimer.wait_time = 10
+		add_child(respawnTimer)
+		respawnTimer.connect("timeout", self, "_respawnTimeout")
 
 func _respawnTimeout():
 	print("Respawn Player")
