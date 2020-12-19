@@ -15,7 +15,11 @@ func _ready():
 		while num in array:
 			num = (randi() % 5) + 1
 		array.append(num)
+<<<<<<< Updated upstream
 		
+=======
+
+>>>>>>> Stashed changes
 	print(array)
 	for i in array:
 		var key = scene.instance()

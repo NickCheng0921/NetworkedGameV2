@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/GameIntroLevel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/mapTileSet.png" type="Texture" id=2]
@@ -449,7 +449,11 @@ points = PoolVector2Array( 10.6061, 1.27478, 12.5351, 8.99081, 29.4139, 8.50858,
 } ]
 6/z_index = 0
 
+<<<<<<< Updated upstream
 [sub_resource type="RectangleShape2D" id=20]
+=======
+[sub_resource type="RectangleShape2D" id=19]
+>>>>>>> Stashed changes
 extents = Vector2( 30.48, 30.394 )
 
 [node name="GameIntroLevel" type="Node2D"]
@@ -496,7 +500,7 @@ script = ExtResource( 6 )
 [node name="StaticBody2D" type="StaticBody2D" parent="lock"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lock/StaticBody2D"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="keyPosition" type="Node" parent="."]
 
@@ -512,5 +516,26 @@ position = Vector2( 1217.52, -34.7673 )
 [node name="keyPos4" type="Position2D" parent="keyPosition"]
 position = Vector2( 774.703, 234.509 )
 
+<<<<<<< Updated upstream
 [node name="keyPos5" type="Position2D" parent="keyPosition"]
 position = Vector2( 1310.3, 543.477 )
+=======
+[node name="creatures" type="Node" parent="."]
+
+[node name="keyPosition" type="Node2D" parent="."]
+
+[node name="keyPos1" type="Position2D" parent="keyPosition"]
+position = Vector2( -1681.22, -2404.57 )
+
+[node name="keyPos2" type="Position2D" parent="keyPosition"]
+position = Vector2( -1334.76, 2288.3 )
+
+[node name="keyPos3" type="Position2D" parent="keyPosition"]
+position = Vector2( 2681.11, -1894.92 )
+
+[node name="keyPos4" type="Position2D" parent="keyPosition"]
+position = Vector2( 3590.73, -1353.13 )
+
+[node name="keyPos5" type="Position2D" parent="keyPosition"]
+position = Vector2( 1313.28, 541.027 )
+>>>>>>> Stashed changes

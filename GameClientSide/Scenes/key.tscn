@@ -1,14 +1,25 @@
 [gd_scene load_steps=4 format=2]
 
+<<<<<<< Updated upstream
 [ext_resource path="res://Scripts/key.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=2]
+=======
+[ext_resource path="res://Sprites/icon.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/key.gd" type="Script" id=2]
+>>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.0553, 29.8414 )
 
 [node name="key" type="Sprite"]
+<<<<<<< Updated upstream
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
+=======
+position = Vector2( -3.66467, -1.7088 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+>>>>>>> Stashed changes
 
 [node name="Area2D" type="Area2D" parent="." groups=[
 "Keys",
