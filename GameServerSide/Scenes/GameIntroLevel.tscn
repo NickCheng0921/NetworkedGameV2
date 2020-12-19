@@ -497,3 +497,35 @@ position = Vector2( 2311.26, 1536.6 )
 [node name="humans" type="Node" parent="."]
 
 [node name="creatures" type="Node" parent="."]
+
+[node name="keyPosition" type="Node2D" parent="."]
+
+[node name="keyPos1" type="Position2D" parent="keyPosition"]
+position = Vector2( -1976, 1946 )
+
+[node name="keyPos2" type="Position2D" parent="keyPosition"]
+position = Vector2( 1312, 1040 )
+
+[node name="keyPos3" type="Position2D" parent="keyPosition"]
+position = Vector2( 1312, 542 )
+
+[node name="keyPos4" type="Position2D" parent="keyPosition"]
+position = Vector2( 3479, 794 )
+
+[node name="keyPos5" type="Position2D" parent="keyPosition"]
+position = Vector2( 3005.3, -158.571 )
+
+[node name="keyPos6" type="Position2D" parent="keyPosition"]
+position = Vector2( 3088.36, -1117.55 )
+
+[node name="keyPos7" type="Position2D" parent="keyPosition"]
+position = Vector2( 2680.6, -2235.09 )
+
+[node name="keyPos8" type="Position2D" parent="keyPosition"]
+position = Vector2( -1697, -2398 )
+
+[node name="keyPos9" type="Position2D" parent="keyPosition"]
+position = Vector2( -3548.97, -1245.91 )
+
+[node name="keyPos10" type="Position2D" parent="keyPosition"]
+position = Vector2( -2703.26, 1328.98 )
