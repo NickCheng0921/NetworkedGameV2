@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/GameIntroLevel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/mapTileSet.png" type="Texture" id=2]
@@ -449,9 +449,6 @@ points = PoolVector2Array( 10.6061, 1.27478, 12.5351, 8.99081, 29.4139, 8.50858,
 } ]
 6/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 31.0553, 29.8414 )
-
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 30.48, 30.394 )
 
@@ -489,18 +486,6 @@ tile_set = SubResource( 18 )
 format = 1
 tile_data = PoolIntArray( -720918, 2, 0, -720917, 4, 0, -720916, 1, 0, -720915, 3, 0, -720914, 4, 0, -720913, 0, 0, -786420, 6, 0, -655373, 6, 0, -655370, 536870918, 0, -655369, 6, 0, -655366, 536870918, 0, -720884, 6, 0, -589844, 5, 0, -589843, 5, 0, -589842, 5, 0, -589837, 6, 0, -589834, 536870918, 0, -589833, 6, 0, -589830, 536870918, 0, -655348, 6, 0, -524308, 5, 0, -524307, 5, 0, -524306, 5, 0, -524301, 6, 0, -524298, 536870918, 0, -524274, 5, 0, -524273, 5, 0, -524272, 5, 0, -524271, 5, 0, -196597, 5, 0, -196593, 5, 0, -65558, 2, 0, -65557, 1, 0, -65556, 2, 0, -65555, 1, 0, -65554, 2, 0, -65553, 1, 0, -131063, 5, 0, -131059, 5, 0, -131055, 5, 0, 196620, 5, 0, 196621, 5, 0, 196622, 5, 0, 262156, 5, 0, 262157, 5, 0, 262158, 5, 0, 589808, 3, 0, 589809, 4, 0, 589810, 1, 0, 655345, 5, 0, 655346, 5, 0, 720881, 5, 0, 720882, 5, 0, 851957, 6, 0, 851960, 5, 0, 851961, 5, 0, 851964, 536870918, 0, 917493, 6, 0, 917500, 536870918, 0 )
 
-[node name="key" type="Sprite" parent="."]
-position = Vector2( 1309.52, 536.394 )
-texture = ExtResource( 4 )
-script = ExtResource( 6 )
-
-[node name="Area2D" type="Area2D" parent="key" groups=[
-"Keys",
-]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="key/Area2D"]
-shape = SubResource( 19 )
-
 [node name="lock" type="Sprite" parent="."]
 modulate = Color( 0.972549, 0, 0, 1 )
 position = Vector2( -3072.1, 656.415 )
@@ -512,3 +497,20 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lock/StaticBody2D"]
 shape = SubResource( 20 )
+
+[node name="keyPosition" type="Node" parent="."]
+
+[node name="keyPos1" type="Position2D" parent="keyPosition"]
+position = Vector2( 1621.92, 189.217 )
+
+[node name="keyPos2" type="Position2D" parent="keyPosition"]
+position = Vector2( 1371.03, 201.039 )
+
+[node name="keyPos3" type="Position2D" parent="keyPosition"]
+position = Vector2( 1217.52, -34.7673 )
+
+[node name="keyPos4" type="Position2D" parent="keyPosition"]
+position = Vector2( 774.703, 234.509 )
+
+[node name="keyPos5" type="Position2D" parent="keyPosition"]
+position = Vector2( 1310.3, 543.477 )
