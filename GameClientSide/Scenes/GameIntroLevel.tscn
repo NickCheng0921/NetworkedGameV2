@@ -492,20 +492,3 @@ shape = SubResource( 19 )
 [node name="humans" type="Node" parent="."]
 
 [node name="creatures" type="Node" parent="."]
-
-[node name="keyPosition" type="Node2D" parent="."]
-
-[node name="keyPos1" type="Position2D" parent="keyPosition"]
-position = Vector2( -1976.64, 1946.71 )
-
-[node name="keyPos2" type="Position2D" parent="keyPosition"]
-position = Vector2( 2681.35, -1912.02 )
-
-[node name="keyPos3" type="Position2D" parent="keyPosition"]
-position = Vector2( -1697.06, -2398.51 )
-
-[node name="keyPos4" type="Position2D" parent="keyPosition"]
-position = Vector2( 3479.63, 794.703 )
-
-[node name="keyPos5" type="Position2D" parent="keyPosition"]
-position = Vector2( 1312.52, 542.387 )

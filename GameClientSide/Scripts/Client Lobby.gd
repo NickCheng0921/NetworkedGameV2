@@ -1,7 +1,7 @@
 extends Node2D
 
-const connectIP = "34.94.217.163"
-#const connectIP = "127.0.0.1"
+#const connectIP = "34.94.217.163"
+const connectIP = "127.0.0.1"
 const connectPort = 44444;
 var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
@@ -48,6 +48,7 @@ puppet func spawn_player(spawn_pos, id):
 	player.set_network_master(id)
 	
 	if(id == get_tree().get_network_unique_id()):
+		Gamestate.isHuman = true
 		var camera = Camera2D.new()
 		camera.make_current()
 		camera.set_limit_smoothing_enabled(100)
@@ -64,6 +65,7 @@ puppet func spawn_creature(spawn_pos, id):
 	creature.set_network_master(id)
 	
 	if(id == get_tree().get_network_unique_id()):
+		Gamestate.isHuman = false
 		get_node("/root/GameIntroLevel/black background").hide()
 		var camera = Camera2D.new()
 		camera.make_current()
