@@ -1,7 +1,7 @@
 extends Node2D
 
-#const connectIP = "34.94.217.163"
-const connectIP = "127.0.0.1"
+const connectIP = "34.94.217.163"
+#const connectIP = "127.0.0.1"
 const connectPort = 44444;
 var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
@@ -73,7 +73,8 @@ puppet func spawn_creature(spawn_pos, id):
 	get_node("/root/GameIntroLevel/creatures").add_child(creature)
 
 remote func gameOver(winCode):
-	level.free()
+	if level:
+		level.free()
 	rpc("localLevelDeleted") #tell server we deleted level
 	get_tree().get_root().add_child(victoryScreen)
 	if(winCode == 'c'): #switch statement not yet in Godot?
