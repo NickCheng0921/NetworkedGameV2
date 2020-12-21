@@ -7,4 +7,4 @@ func _ready():
 
 func _on_replayButton_pressed():
 	rpc_id(1, "replay_call")
-	get_node(".").call_deferred('free')
+	get_node("/root/victoryScreen").call_deferred('free')

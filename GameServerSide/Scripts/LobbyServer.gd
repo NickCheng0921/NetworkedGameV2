@@ -3,7 +3,7 @@ extends Node2D
 var openPort = 44444
 var max_clients = 4
 var playerReady = 0
-var playersToStartGame = 1
+var playersToStartGame = 2
 var ready_players = []
 var level
 var victoryScreen = preload("res://Scenes/victoryScreen.tscn")
@@ -31,6 +31,8 @@ func _player_disconnected(id):
 remote func replay_call():
 	playerReady += 1
 	if(playerReady == playersToStartGame):
+		print("Setting up new game")
+		get_node("/root/victoryScreen").call_deferred('free')
 		playerReady = 0
 		pre_start_game()
 	
