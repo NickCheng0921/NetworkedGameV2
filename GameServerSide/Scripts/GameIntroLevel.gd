@@ -8,6 +8,7 @@ var keyArray = []
 	
 func _ready():
 	randomize()
+	pick_keys()
 	
 func spawn_player(spawn_pos, id):
 	var player = Player.instance()
@@ -26,6 +27,7 @@ func spawn_creature(spawn_pos, id):
 	print("    Creature spawned")
 
 func pick_keys():
+	keyArray = []
 	for i in range(3):
 		var num = (randi() % numKeyPositions) + 1
 		while num in keyArray:
