@@ -8,12 +8,7 @@ var keyArray = []
 	
 func _ready():
 	randomize()
-	for i in range(3):
-		var num = (randi() % numKeyPositions) + 1
-		while num in keyArray:
-			num = (randi() % numKeyPositions) + 1
-		keyArray.append(num)
-	print("Keys chosen: ", keyArray)
+	pick_keys()
 	
 func spawn_player(spawn_pos, id):
 	var player = Player.instance()
@@ -31,6 +26,15 @@ func spawn_creature(spawn_pos, id):
 	get_node("/root/GameIntroLevel/creatures").add_child(creature)
 	print("    Creature spawned")
 
+func pick_keys():
+	keyArray = []
+	for i in range(3):
+		var num = (randi() % numKeyPositions) + 1
+		while num in keyArray:
+			num = (randi() % numKeyPositions) + 1
+		keyArray.append(num)
+	print("Keys chosen: ", keyArray)
+	
 func spawn_keys(): #network call to client to spawn keys
 	for i in keyArray:
 		var key_pos = get_node("/root/GameIntroLevel/keyPosition/keyPos" + str(i)).position
