@@ -1,8 +1,9 @@
 extends Node2D
 
-var openPort = 44444;
-var max_clients = 4;
-var playerReady = 0;
+var openPort = 44444
+var max_clients = 4
+var playerReady = 0
+var playersToStartGame = 1
 var ready_players = []
 var level
 var victoryScreen = preload("res://Scenes/victoryScreen.tscn")
@@ -13,25 +14,28 @@ func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 	var server = NetworkedMultiplayerENet.new()
 	server.create_server(openPort, max_clients)
-	displayServerInfo()
 	get_tree().set_network_peer(server)
 
-func displayServerInfo():
-	print("1. Server up on port: ", openPort)
-	
 func _player_connected(id):
 	print("    P", id, " connected to server")
 	ready_players.append(id)
 	#start game once 2 players connect
-	if ready_players.size() == 2:
+	if ready_players.size() == playersToStartGame:
 		pre_start_game()
+		get_tree().set_refuse_new_network_connections(true)
 	
 func _player_disconnected(id):
 	print("Client ", id, " disconnected")
 	ready_players.erase(id)
 	
+remote func replay_call():
+	playerReady += 1
+	if(playerReady == playersToStartGame):
+		playerReady = 0
+		pre_start_game()
+	
 func pre_start_game():
-	print("2. Load map and spawn players locally")
+	print("Load map and spawn players locally")
 	#load game and spawn players locally before doing it over network for players
 	var world = load("res://Scenes/GameIntroLevel.tscn").instance()
 	get_tree().get_root().add_child(world)
@@ -48,7 +52,7 @@ func pre_start_game():
 		
 	for id in ready_players:
 		rpc_id(id, "pre_start_game")
-	print("3. Wait for players to set up game")
+	print("Wait for players to set up game")
 	
 remote func post_start_game(): #spawn players and objects
 	var caller_id = get_tree().get_rpc_sender_id()
