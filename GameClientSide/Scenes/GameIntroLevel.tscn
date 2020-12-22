@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scripts/GameIntroLevel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/mapTileSet.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/SPED.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/a7o2dg5k.bmp" type="Texture" id=5]
 [ext_resource path="res://Scripts/key.gd" type="Script" id=6]
@@ -451,6 +452,9 @@ points = PoolVector2Array( 10.6061, 1.27478, 12.5351, 8.99081, 29.4139, 8.50858,
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 30.48, 30.394 )
 
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 31.9994, 31.3659 )
+
 [node name="GameIntroLevel" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -469,6 +473,7 @@ scale = Vector2( 11.036, 11.3427 )
 texture = ExtResource( 5 )
 
 [node name="black background" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0.0196078, 0.0196078, 0.0196078, 1 )
 
 [node name="mapDetails" type="TileMap" parent="."]
@@ -492,3 +497,17 @@ shape = SubResource( 19 )
 [node name="humans" type="Node" parent="."]
 
 [node name="creatures" type="Node" parent="."]
+
+[node name="SPED" type="Sprite" parent="."]
+modulate = Color( 0.00392157, 0.666667, 0, 1 )
+position = Vector2( -3269.65, 646.07 )
+scale = Vector2( 3.13092, 2.92046 )
+texture = ExtResource( 4 )
+script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="SPED" groups=[
+"SPED",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SPED/Area2D"]
+shape = SubResource( 20 )

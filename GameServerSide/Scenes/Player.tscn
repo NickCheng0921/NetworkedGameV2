@@ -6,7 +6,9 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 22.226
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"playerDamageable",
+]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

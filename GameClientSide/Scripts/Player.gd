@@ -104,7 +104,12 @@ remote func player_respawn(respawn_pos):
 	isDead = false
 	show()
 
-func _on_Area2D_area_entered(area):
+remote func _on_Area2D_area_entered(area):
 	if area.is_in_group("Keys"):
 		Gamestate.numkeys = Gamestate.numkeys + 1
 		area.get_parent().queue_free()
+		print(Gamestate.numkeys)
+	if area.is_in_group("SPED"):
+		print("Humans Win")
+		Gamestate.numkeys = 0
+		get_node("/root/Lobby").rpc_id(1,"remoteGameOver", "h")
