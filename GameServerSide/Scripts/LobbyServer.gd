@@ -68,7 +68,11 @@ remote func post_start_game(): #spawn players and objects
 		rpc_id( caller_id, "spawn_creature", Vector2(1000, 1000), ready_players[0] )
 		rpc_id( caller_id, "spawn_player", Vector2(500, 300), ready_players[1] )
 	get_node("/root/GameIntroLevel").spawn_keys()
-
+	
+remote func remoteGameOver(winCode):
+	print("Match Over")
+	get_node("/root/Lobby").rpc("gameOver", winCode)
+	
 func gameOver(winCode):
 	print("Match Over")
 	get_node("/root/Lobby").rpc("gameOver", winCode)
