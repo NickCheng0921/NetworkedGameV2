@@ -35,23 +35,17 @@ remote func creature_swipe():
 	sender_id = get_tree().get_rpc_sender_id()
 	if attackRayCast.is_colliding() != false:
 		attackCollision = attackRayCast.get_collider()
-		print("C", sender_id, " hit ", attackCollision.get_name())
-		attackCollision.rpc("take_damage")
+		if attackCollision.is_in_group("playerDamageable"):
+			print("C", sender_id, " hit ", attackCollision.get_name())
+			attackCollision.rpc("take_damage")
 
 remote func creature_died():
-	creatureDeaths += 1
-	if(creatureDeaths >= 3): #player wins on 3 creature kills
-		print("------------------\nPlayer Won\n------------------")
-		creatureDeaths = 0
-		get_node("/root/Lobby").gameOver('h')
-	#create timer for respawn
-	else:
-		var respawnTimer = Timer.new()
-		respawnTimer.autostart = true
-		respawnTimer.set_one_shot(true)
-		respawnTimer.wait_time = 1.5
-		add_child(respawnTimer)
-		respawnTimer.connect("timeout", self, "_respawnTimeout")
+	var respawnTimer = Timer.new()
+	respawnTimer.autostart = true
+	respawnTimer.set_one_shot(true)
+	respawnTimer.wait_time = 1.5
+	add_child(respawnTimer)
+	respawnTimer.connect("timeout", self, "_respawnTimeout")
 
 func _respawnTimeout():
 	print("Respawn Creature")

@@ -32,8 +32,9 @@ remote func player_shoot():
 	sender_id = get_tree().get_rpc_sender_id()  
 	if shootRayCast.is_colliding() != false:
 		shootCollision = shootRayCast.get_collider()
-		print("P", sender_id, " hit ", shootCollision.get_name())
-		shootCollision.rpc("take_damage")
+		if shootCollision.is_in_group("playerDamageable"):
+			print("P", sender_id, " hit ", shootCollision.get_name())
+			shootCollision.rpc("take_damage")
 		
 remote func player_died():
 	print("------------------\nCreature Won\n------------------")

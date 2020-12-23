@@ -1,5 +1,5 @@
 extends Sprite
 
 func _process(delta):
-	if Gamestate.numkeys >= 3:
+	if Gamestate.numkeys >= 6:
 		queue_free()

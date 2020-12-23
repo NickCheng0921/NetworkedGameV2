@@ -104,7 +104,7 @@ remote func player_respawn(respawn_pos):
 	isDead = false
 	show()
 
-remote func _on_Area2D_area_entered(area):
+func _on_Area2D_area_entered(area):
 	if area.is_in_group("Keys"):
 		Gamestate.numkeys = Gamestate.numkeys + 1
 		area.get_parent().queue_free()
