@@ -473,7 +473,6 @@ scale = Vector2( 11.036, 11.3427 )
 texture = ExtResource( 5 )
 
 [node name="black background" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0.0196078, 0.0196078, 0.0196078, 1 )
 
 [node name="mapDetails" type="TileMap" parent="."]

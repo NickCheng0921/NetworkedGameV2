@@ -23,6 +23,12 @@ config/icon="res://Sprites/icon.png"
 
 Gamestate="*res://Scripts/gamestate.gd"
 
+[display]
+
+window/size/width=1366
+window/size/height=768
+window/size/resizable=false
+
 [input]
 
 ui_left={
