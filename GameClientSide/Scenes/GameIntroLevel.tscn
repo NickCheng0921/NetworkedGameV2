@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/GameIntroLevel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/mapTileSet.png" type="Texture" id=2]
@@ -452,8 +452,17 @@ points = PoolVector2Array( 10.6061, 1.27478, 12.5351, 8.99081, 29.4139, 8.50858,
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 30.48, 30.394 )
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="CanvasItemMaterial" id=20]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 31.9994, 31.3659 )
+
+[sub_resource type="Environment" id=22]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 8.0
+glow_blend_mode = 0
 
 [node name="GameIntroLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -498,7 +507,9 @@ shape = SubResource( 19 )
 [node name="creatures" type="Node" parent="."]
 
 [node name="SPED" type="Sprite" parent="."]
-modulate = Color( 0.00392157, 0.666667, 0, 1 )
+modulate = Color( 0.00784314, 1, 0, 1 )
+self_modulate = Color( 0.823529, 0.721569, 0.721569, 1 )
+material = SubResource( 20 )
 position = Vector2( -3269.65, 646.07 )
 scale = Vector2( 3.13092, 2.92046 )
 texture = ExtResource( 4 )
@@ -509,4 +520,7 @@ script = ExtResource( 3 )
 ]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SPED/Area2D"]
-shape = SubResource( 20 )
+shape = SubResource( 21 )
+
+[node name="glow" type="WorldEnvironment" parent="SPED"]
+environment = SubResource( 22 )
