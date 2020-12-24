@@ -7,8 +7,6 @@ var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
 var level #used for removing and changing maps
 var victoryScreen = preload("res://Scenes/victoryScreen.tscn")
-var creatureVictoryScreen = preload("res://Scenes/creatureVictory.tscn")
-var humanVictoryScreen = preload("res://Scenes/humanVictory.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -83,13 +81,9 @@ remote func gameOver(winCode):
 	print("Victory Screen Displayed")
 	get_tree().get_root().add_child(victoryScreen.instance())
 	if(winCode == 'c'): #switch statement not yet in Godot?
-		#get_tree().get_root().add_child(creatureVictoryScreen.instance())
-		#get_node("/root/victoryScreen/whoWon").add_text("Creatures Won ")
 		get_node("/root/victoryScreen/creatureVictory").show()
 		get_node("/root/victoryScreen/humanVictory").hide()
 	if(winCode == 'h'):
-		#get_tree().get_root().add_child(humanVictoryScreen.instance())
-		#get_node("/root/victoryScreen/whoWon").add_text("Humans Won ")
 		get_node("/root/victoryScreen/creatureVictory").hide()
 		get_node("/root/victoryScreen/humanVictory").show()
 		
