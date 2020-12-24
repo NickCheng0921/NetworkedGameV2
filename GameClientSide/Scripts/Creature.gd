@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 600
+const MOVE_SPEED = 550
 var velocity = Vector2()
 var isGreen = false
 var hitCounter = 0
@@ -11,7 +11,7 @@ var canMove = true
 var isDead = false
 var deadTimer = 0
 var humanPlayer
-var playerPos = Vector2()
+var playerPos = Vector2(0, 0)
 var canTrack = false
 export var meleeDamage = 1 #this is the damage we take on a hit
 
@@ -105,7 +105,7 @@ func findPlayer():
 remote func take_damage():
 	if not isDead:
 		isGreen = true
-		modulate = Color(255,0,0)
+		modulate = Color(0,255,0)
 		currHealth -= meleeDamage
 		
 		if(currHealth <= 0):

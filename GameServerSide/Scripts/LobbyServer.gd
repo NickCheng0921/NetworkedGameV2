@@ -8,8 +8,10 @@ var ready_players = []
 var level
 var victoryScreen = preload("res://Scenes/victoryScreen.tscn")
 var numFinishedPlayers = 0
-
+var canDeleteLevel = true
+	
 func _ready():
+	print("Server up")
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 	var server = NetworkedMultiplayerENet.new()
@@ -42,8 +44,9 @@ func pre_start_game():
 	var world = load("res://Scenes/GameIntroLevel.tscn").instance()
 	get_tree().get_root().add_child(world)
 	level = get_node("/root/GameIntroLevel")
+	canDeleteLevel = true
 	#spawn players
-	var spawn_pos1 = Vector2(500, 300)
+	var spawn_pos1 = Vector2(-3000, 650)
 	var spawn_pos2 = Vector2(1000, 1000)
 	#right now, spawning is hard coded, make it through loop in future
 	if(ready_players.size() == 1):
@@ -66,13 +69,9 @@ remote func post_start_game(): #spawn players and objects
 		rpc_id( caller_id, "spawn_creature", Vector2(1000, 1000), ready_players[0] )
 	if(ready_players.size() == 2):
 		rpc_id( caller_id, "spawn_creature", Vector2(1000, 1000), ready_players[0] )
-		rpc_id( caller_id, "spawn_player", Vector2(500, 300), ready_players[1] )
+		rpc_id( caller_id, "spawn_player", Vector2(-3000, 650), ready_players[1] )
 		#for 2 player system, get creature and set up the hint arrow
 	get_node("/root/GameIntroLevel").spawn_keys()
-	
-remote func remoteGameOver(winCode):
-	print("Match Over")
-	get_node("/root/Lobby").rpc("gameOver", winCode)
 	
 func gameOver(winCode):
 	print("Match Over")
@@ -80,8 +79,13 @@ func gameOver(winCode):
 
 remote func localLevelDeleted(): #server removes level once all clients remove level
 	numFinishedPlayers += 1
-	if(numFinishedPlayers == ready_players.size()):
+
+	if(numFinishedPlayers >= ready_players.size()):
+		print(numFinishedPlayers, " Players deleted level")
 		numFinishedPlayers = 0
-		print("Player deleted level")
-		level.queue_free()
-		get_tree().get_root().add_child(victoryScreen.instance())
+		if level and canDeleteLevel:
+			print("Server deleted level")
+			canDeleteLevel = false #handles duplicate network call
+			#deleteLevel set to true again when new level made
+			level.queue_free()
+			get_tree().get_root().add_child(victoryScreen.instance())
