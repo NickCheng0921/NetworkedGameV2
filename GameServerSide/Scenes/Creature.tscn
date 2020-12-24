@@ -21,3 +21,4 @@ shape = SubResource( 1 )
 [node name="attackRayCast" type="RayCast2D" parent="."]
 rotation = -1.5708
 enabled = true
+cast_to = Vector2( 0, 65 )

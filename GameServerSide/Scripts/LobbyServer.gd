@@ -47,7 +47,7 @@ func pre_start_game():
 	var spawn_pos2 = Vector2(1000, 1000)
 	#right now, spawning is hard coded, make it through loop in future
 	if(ready_players.size() == 1):
-		get_node("/root/GameIntroLevel").spawn_player(spawn_pos2, ready_players[0])
+		get_node("/root/GameIntroLevel").spawn_creature(spawn_pos2, ready_players[0])
 	if(ready_players.size() == 2):
 		get_node("/root/GameIntroLevel").spawn_creature(spawn_pos2, ready_players[0])
 		get_node("/root/GameIntroLevel").spawn_player(spawn_pos1, ready_players[1])
@@ -63,10 +63,11 @@ remote func post_start_game(): #spawn players and objects
 	#	print("        RPC load ", id)
 	#	rpc_id( caller_id, "spawn_player", Vector2(500, 300), id )
 	if(ready_players.size() == 1):
-		rpc_id( caller_id, "spawn_player", Vector2(1000, 1000), ready_players[0] )
+		rpc_id( caller_id, "spawn_creature", Vector2(1000, 1000), ready_players[0] )
 	if(ready_players.size() == 2):
 		rpc_id( caller_id, "spawn_creature", Vector2(1000, 1000), ready_players[0] )
 		rpc_id( caller_id, "spawn_player", Vector2(500, 300), ready_players[1] )
+		#for 2 player system, get creature and set up the hint arrow
 	get_node("/root/GameIntroLevel").spawn_keys()
 	
 remote func remoteGameOver(winCode):
