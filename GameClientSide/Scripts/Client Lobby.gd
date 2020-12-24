@@ -83,8 +83,8 @@ remote func gameOver(winCode):
 	print("Victory Screen Displayed")
 	#get_tree().get_root().add_child(victoryScreen.instance())
 	if(winCode == 'c'): #switch statement not yet in Godot?
-		get_tree().get_root().add_child(creatureVictoryScreen.instance())
-		#get_node("/root/victoryScreen/whoWon").add_text("Creatures Won ")
+		#get_tree().get_root().add_child(creatureVictoryScreen.instance())
+		get_node("/root/victoryScreen/whoWon").add_text("Creatures Won ")
 	if(winCode == 'h'):
-		get_tree().get_root().add_child(humanVictoryScreen.instance())
-		#get_node("/root/victoryScreen/whoWon").add_text("Humans Won ")
+		#get_tree().get_root().add_child(humanVictoryScreen.instance())
+		get_node("/root/victoryScreen/whoWon").add_text("Humans Won ")
