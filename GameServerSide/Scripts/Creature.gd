@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 550
+const MOVE_SPEED = 600
 var velocity = Vector2()
 onready var attackRayCast = $attackRayCast
 var attackCollision
@@ -21,7 +21,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	arrowDirection = 0
 	position = puppet_pos
 	velocity = puppet_vel
 	global_rotation = look_dir

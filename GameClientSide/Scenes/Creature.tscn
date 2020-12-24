@@ -21,8 +21,6 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="hintArrow" type="Sprite" parent="."]
-visible = false
 position = Vector2( 50, 0 )
-rotation = 1.5708
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
