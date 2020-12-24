@@ -81,7 +81,7 @@ remote func gameOver(winCode):
 		level.call_deferred('free')
 	rpc_id(1, "localLevelDeleted") #tell server we deleted level
 	print("Victory Screen Displayed")
-	#get_tree().get_root().add_child(victoryScreen.instance())
+	get_tree().get_root().add_child(victoryScreen.instance())
 	if(winCode == 'c'): #switch statement not yet in Godot?
 		#get_tree().get_root().add_child(creatureVictoryScreen.instance())
 		get_node("/root/victoryScreen/whoWon").add_text("Creatures Won ")

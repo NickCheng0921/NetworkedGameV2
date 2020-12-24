@@ -10,7 +10,9 @@ export var swipeCooldown = 0.4
 var canMove = true
 var isDead = false
 var deadTimer = 0
-var humanPlayer = Vector2(0, 0)
+var humanPlayer
+var playerPos = Vector2()
+var canTrack = false
 export var meleeDamage = 1 #this is the damage we take on a hit
 
 puppet var puppet_pos = Vector2()
@@ -37,7 +39,8 @@ func _process(delta):
 			hitCounter = 0
 			modulate = Color(0, 0, 0, 1)
 			isGreen = false
-	
+	if(canTrack):
+		playerPos = humanPlayer.position
 	#only move if we're the master of this player
 	if is_network_master():
 		var move_direction = Vector2()
@@ -75,7 +78,7 @@ func _process(delta):
 		global_rotation = look_dir
 	
 	move_and_collide(velocity*delta)
-	arrowDirection = atan2(humanPlayer.x - global_position.x , global_position.y - humanPlayer.y)
+	arrowDirection = atan2(playerPos.x - global_position.x , global_position.y - playerPos.y)
 	arrowDirection -= look_dir
 	get_node("hintArrow").rotation = arrowDirection
 	
@@ -96,7 +99,8 @@ func _swipeCooldownTimeout():
 	
 func findPlayer():
 	#gets the first value, will work fine for a 2 player game
-	humanPlayer = get_node("/root/GameIntroLevel/humans").get_children()[0].position
+	canTrack = true
+	humanPlayer = get_node("/root/GameIntroLevel/humans").get_children()[0]
 	
 remote func take_damage():
 	if not isDead:
