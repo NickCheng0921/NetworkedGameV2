@@ -73,10 +73,14 @@ remote func post_start_game(): #spawn players and objects
 		#for 2 player system, get creature and set up the hint arrow
 	get_node("/root/GameIntroLevel").spawn_keys()
 	
-func gameOver(winCode):
+func gameOver(winCode): #used when server ends game
 	print("Match Over")
 	get_node("/root/Lobby").rpc("gameOver", winCode)
-
+	
+remote func remoteGameOver(winCode): #used when clients end game
+	print("Match Over")
+	get_node("/root/Lobby").rpc("gameOver", winCode)
+	
 remote func localLevelDeleted(): #server removes level once all clients remove level
 	numFinishedPlayers += 1
 
