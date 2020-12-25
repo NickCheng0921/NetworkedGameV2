@@ -25,7 +25,7 @@ func _ready():
 func _process(delta):
 	if(isGreen):
 		hitCounter += 1
-		if(hitCounter > 5):
+		if(hitCounter > 4):
 			hitCounter = 0
 			modulate = Color(0, 0, 0, 1)
 			isGreen = false
