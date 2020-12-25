@@ -15,3 +15,4 @@ remote func client_spawn_key(key_pos):
 		var key = keyScene.instance()
 		key.position = key_pos
 		add_child(key)
+		print("Made key")

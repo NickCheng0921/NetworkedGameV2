@@ -3,6 +3,8 @@ extends Node2D
 var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
 var numKeyPositions = 10
+var keyIndex = 0
+var numKeysToSpawn = 3
 var creatureDeaths = 0
 var keyArray = []
 	
@@ -28,14 +30,25 @@ func spawn_creature(spawn_pos, id):
 
 func pick_keys():
 	keyArray = []
+	keyIndex = 0
 	for i in range(3):
 		var num = (randi() % numKeyPositions) + 1
 		while num in keyArray:
 			num = (randi() % numKeyPositions) + 1
 		keyArray.append(num)
+	keyArray = [1,2,3] #FIXME
 	print("Keys chosen: ", keyArray)
 	
-func spawn_keys(): #network call to client to spawn keys
-	for i in keyArray:
-		var key_pos = get_node("/root/GameIntroLevel/keyPosition/keyPos" + str(i)).position
+remote func spawn_keys(): #network call to client to spawn keys
+#----Make Client spawn all keys at once
+	#for i in keyArray: 
+	#	var key_pos = get_node("/root/GameIntroLevel/keyPosition/keyPos" + str(i)).position
+	#	rpc("client_spawn_key", key_pos)
+#----Spawn a key on client side, then wait til they find it to spawn next
+	if not (keyIndex+1 > numKeysToSpawn):
+		print("Spawn key ", keyIndex+1)
+		var key_pos = get_node("/root/GameIntroLevel/keyPosition/keyPos" + str(keyArray[keyIndex])).position
 		rpc("client_spawn_key", key_pos)
+		keyIndex += 1
+	else:
+		print("All keys found")
