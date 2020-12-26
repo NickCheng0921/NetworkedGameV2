@@ -53,7 +53,9 @@ puppet func spawn_player(spawn_pos, id):
 		camera.make_current()
 		camera.set_limit_smoothing_enabled(100)
 		player.add_child(camera)
-	
+		#make keys if player controls side
+		get_node("/root/GameIntroLevel").rpc_id(1, "spawn_keys")
+		
 	get_node("/root/GameIntroLevel/humans").add_child(player)
 
 puppet func spawn_creature(spawn_pos, id):

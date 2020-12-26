@@ -109,6 +109,7 @@ func _on_Area2D_area_entered(area):
 		Gamestate.numkeys = Gamestate.numkeys + 1
 		area.get_parent().queue_free()
 		print(Gamestate.numkeys)
+		get_node("/root/GameIntroLevel").rpc_id(1, "spawn_keys")
 	if area.is_in_group("SPED"):
 		print("Humans Win")
 		Gamestate.numkeys = 0
