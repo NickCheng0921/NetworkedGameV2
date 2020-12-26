@@ -36,7 +36,6 @@ func pick_keys():
 		while num in keyArray:
 			num = (randi() % numKeyPositions) + 1
 		keyArray.append(num)
-	keyArray = [1,2,3] #FIXME
 	print("Keys chosen: ", keyArray)
 	
 remote func spawn_keys(): #network call to client to spawn keys
