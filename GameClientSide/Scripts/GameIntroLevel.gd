@@ -15,4 +15,6 @@ remote func client_spawn_key(key_pos):
 		var key = keyScene.instance()
 		key.position = key_pos
 		add_child(key)
+		if Gamestate.isHuman:
+			print(get_tree().get_network_unique_id(), " is human")
 		print(get_tree().get_network_unique_id(), " made key")

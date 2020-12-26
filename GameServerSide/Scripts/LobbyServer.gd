@@ -71,7 +71,7 @@ remote func post_start_game(): #spawn players and objects
 		rpc_id( caller_id, "spawn_creature", Vector2(1000, 1000), ready_players[0] )
 		rpc_id( caller_id, "spawn_player", Vector2(-3000, 650), ready_players[1] )
 		#for 2 player system, get creature and set up the hint arrow
-	get_node("/root/GameIntroLevel").spawn_keys()
+		get_node("/root/GameIntroLevel").spawn_keys()
 	
 func gameOver(winCode): #used when server ends game
 	print("Match Over")
