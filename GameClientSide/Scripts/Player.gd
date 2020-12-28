@@ -43,6 +43,7 @@ func _process(delta):
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
 		if Input.is_action_just_pressed("ui_shoot") and canShoot:
+			playerShootSound()
 			rpc_unreliable_id(1, "player_shoot")
 			shoot_cooldown()
 			canShoot = false
@@ -103,6 +104,9 @@ remote func player_respawn(respawn_pos):
 	canShoot = true
 	isDead = false
 	show()
+
+remotesync func playerShootSound():
+	$AnimationPlayer.play("pistolBlast")
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Keys"):
