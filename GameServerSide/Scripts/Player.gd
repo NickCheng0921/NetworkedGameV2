@@ -54,3 +54,6 @@ func _respawnTimeout():
 	respawn_pos.y = 300
 	currHealth = maxHealth
 	rpc("player_respawn", respawn_pos)
+
+remotesync func playerShootSound():
+	pass #we don't need to play a shoot sound on server

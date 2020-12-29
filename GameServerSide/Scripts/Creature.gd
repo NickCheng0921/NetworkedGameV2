@@ -51,3 +51,6 @@ func _respawnTimeout():
 	var respawn_pos = get_node("/root/GameIntroLevel/creatureRespawns/pos" + str((randi() % numSpawns) + 1)).position
 	currHealth = maxHealth
 	rpc("creature_respawn", respawn_pos)
+
+remotesync func creatureSwipeSound():
+	pass #we don't need server to play a sound on creature swipe
