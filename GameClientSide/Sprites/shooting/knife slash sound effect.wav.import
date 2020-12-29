@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/knife slash sound effect.wav-b19a0860ab2b8f2821c23a02ab1dc869.sample"
+
+[deps]
+
+source_file="res://Sprites/shooting/knife slash sound effect.wav"
+dest_files=[ "res://.import/knife slash sound effect.wav-b19a0860ab2b8f2821c23a02ab1dc869.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

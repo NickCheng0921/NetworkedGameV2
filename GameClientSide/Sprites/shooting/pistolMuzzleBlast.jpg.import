@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pistolMuzzleBlast.jpg-d4cdae58d342ba54a4b2f179f2d5370f.stex"
+path="res://.import/pistolMuzzleBlast.jpg-4b169f21b3001aa1567ef45ebc207d90.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/human shoot/pistolMuzzleBlast.jpg"
-dest_files=[ "res://.import/pistolMuzzleBlast.jpg-d4cdae58d342ba54a4b2f179f2d5370f.stex" ]
+source_file="res://Sprites/shooting/pistolMuzzleBlast.jpg"
+dest_files=[ "res://.import/pistolMuzzleBlast.jpg-4b169f21b3001aa1567ef45ebc207d90.stex" ]
 
 [params]
 
