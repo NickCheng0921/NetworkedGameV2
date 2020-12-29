@@ -43,7 +43,7 @@ func _process(delta):
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
 		if Input.is_action_just_pressed("ui_shoot") and canShoot:
-			playerShootSound()
+			rpc("playerShootSound")
 			rpc_unreliable_id(1, "player_shoot")
 			shoot_cooldown()
 			canShoot = false

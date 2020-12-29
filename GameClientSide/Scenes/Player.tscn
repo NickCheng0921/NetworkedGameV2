@@ -7,11 +7,10 @@
 [ext_resource path="res://Sprites/shooting/pistolMuzzleBlast.jpg" type="Texture" id=5]
 [ext_resource path="res://Sprites/shooting/9-mm-gunshot.wav" type="AudioStream" id=6]
 
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.3586
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("pistolFlashSprite:frame")
@@ -89,9 +88,10 @@ shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 10.0
-anims/pistolBlast = SubResource( 3 )
+anims/pistolBlast = SubResource( 2 )
 
 [node name="pistolFlashSprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 54.6042, 6.51171 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )

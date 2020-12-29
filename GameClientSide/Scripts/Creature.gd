@@ -55,6 +55,7 @@ func _process(delta):
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
 		if Input.is_action_just_pressed("ui_shoot") and canShoot:
+			creatureSwipeSound()
 			rpc_unreliable_id(1, "creature_swipe")
 			swipe_cooldown()
 			canShoot = false
@@ -127,3 +128,6 @@ remote func creature_respawn(respawn_pos):
 	get_node("CollisionShape2D").disabled = false
 	isDead = false
 	show()
+
+remotesync func creatureSwipeSound():
+	$AnimationPlayer.play("creatureSwipeAttack")
