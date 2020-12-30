@@ -10,7 +10,7 @@ radius = 21.5379
 
 [sub_resource type="Animation" id=2]
 resource_name = "creatureSwipeAttack"
-length = 0.5
+length = 0.3
 tracks/0/type = "audio"
 tracks/0/path = NodePath("AudioStreamPlayer2D")
 tracks/0/interp = 1
@@ -19,7 +19,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "clips": [ {
-"end_offset": 0.0,
+"end_offset": 1.1,
 "start_offset": 1.1,
 "stream": ExtResource( 4 )
 } ],

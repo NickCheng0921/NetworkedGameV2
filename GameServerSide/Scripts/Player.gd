@@ -57,3 +57,6 @@ func _respawnTimeout():
 
 remotesync func playerShootSound():
 	pass #we don't need to play a shoot sound on server
+
+remotesync func reload():
+	pass

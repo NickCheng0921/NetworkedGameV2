@@ -6,11 +6,13 @@ var isGreen = false
 var hitCounter = 0
 export var maxHealth = 8
 var canShoot = true
-export var shootCooldown = .3
+export var shootCooldown = .35
 var canMove = true
 var isDead = false
 var deadTimer = 0
 export var bulletDamage = 1 #this is the damage we take on a hit
+export var pistolMagSize = 6
+var currentMagSize = pistolMagSize
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_vel = Vector2()
@@ -42,11 +44,16 @@ func _process(delta):
 			move_direction.x -= 1
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
-		if Input.is_action_just_pressed("ui_shoot") and canShoot:
+		if Input.is_action_just_pressed("ui_shoot") and canShoot and currentMagSize > 0:
 			rpc("playerShootSound")
 			rpc_unreliable_id(1, "player_shoot")
-			shoot_cooldown()
 			canShoot = false
+			currentMagSize -= 1
+			shoot_cooldown()
+		if Input.is_action_just_pressed("reload"):
+			canShoot = false
+			rpc("reload")
+			
 		if(canMove):
 			velocity = move_direction.normalized()*MOVE_SPEED
 		else:
@@ -81,7 +88,10 @@ func shoot_cooldown():
 	shootCooldownTimer.connect("timeout", self, "_shootCooldownTimeout")
 	
 func _shootCooldownTimeout():
-	canShoot = true
+	if(currentMagSize > 0):
+		canShoot = true
+	else:
+		rpc("reload")
 	
 remote func take_damage():
 	if not isDead:
@@ -108,6 +118,13 @@ remote func player_respawn(respawn_pos):
 remotesync func playerShootSound():
 	$AnimationPlayer.play("pistolBlast")
 
+remotesync func reload():
+	$AnimationPlayer.play("pistolReload")
+	
+func fillAmmo():
+	currentMagSize = pistolMagSize
+	canShoot = true
+	
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Keys"):
 		Gamestate.numkeys = Gamestate.numkeys + 1
