@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sprites/HUD/humanHPBar.png" type="Texture" id=1]
+
+[node name="humanHUD" type="CanvasLayer"]
+
+[node name="hpBar" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+vframes = 9
+frame = 1
