@@ -5,7 +5,8 @@
 [node name="humanHUD" type="CanvasLayer"]
 
 [node name="hpBar" type="Sprite" parent="."]
-scale = Vector2( 2, 2 )
+position = Vector2( 1200, 50 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 vframes = 9
-frame = 1
+frame = 7
