@@ -7,6 +7,7 @@ var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
 var level #used for removing and changing maps
 var victoryScreen = preload("res://Scenes/victoryScreen.tscn")
+var playerHUD = preload("res://Scenes/humanHUD.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -55,7 +56,8 @@ puppet func spawn_player(spawn_pos, id):
 		player.add_child(camera)
 		#make keys if player controls side
 		get_node("/root/GameIntroLevel").rpc_id(1, "spawn_keys")
-		
+		var hud = playerHUD.instance() #make hud for player
+		player.add_child(hud)
 	get_node("/root/GameIntroLevel/humans").add_child(player)
 
 puppet func spawn_creature(spawn_pos, id):

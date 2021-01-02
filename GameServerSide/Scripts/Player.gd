@@ -5,7 +5,7 @@ var velocity = Vector2()
 onready var shootRayCast = $shootRayCast
 var shootCollision
 var sender_id = 0
-export var maxHealth = 8
+export var maxHealth = 7
 export var canRespawn = false
 
 puppet var puppet_pos = Vector2()

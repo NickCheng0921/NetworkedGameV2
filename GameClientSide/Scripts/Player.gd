@@ -4,7 +4,7 @@ const MOVE_SPEED = 450
 var velocity = Vector2()
 var isGreen = false
 var hitCounter = 0
-export var maxHealth = 8
+export var maxHealth = 7
 var canShoot = true
 export var shootCooldown = .35
 var canMove = true
@@ -98,7 +98,9 @@ remote func take_damage():
 		isGreen = true
 		modulate = Color(255,0,0)
 		currHealth -= bulletDamage
-		
+		if is_network_master():
+			get_node("/root/GameIntroLevel/humans/" + str(get_tree().get_network_unique_id()) + "/humanHUD/hpBar").set_frame(currHealth)
+			
 		if(currHealth <= 0):
 			rpc_id(1, "player_died")
 			canShoot = false
