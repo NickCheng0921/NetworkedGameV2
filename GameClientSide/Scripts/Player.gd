@@ -49,7 +49,9 @@ func _process(delta):
 			rpc_unreliable_id(1, "player_shoot")
 			canShoot = false
 			currentMagSize -= 1
-			shoot_cooldown()
+			shoot_cooldown() #tell server we shot so server can manage firing delay
+			if is_network_master():
+				get_node("/root/GameIntroLevel/humans/" + str(get_tree().get_network_unique_id()) + "/humanHUD/bulletHUD").set_frame(currentMagSize)
 		if Input.is_action_just_pressed("reload"):
 			canShoot = false
 			rpc("reload")
@@ -126,6 +128,8 @@ remotesync func reload():
 func fillAmmo():
 	currentMagSize = pistolMagSize
 	canShoot = true
+	if is_network_master():
+		get_node("/root/GameIntroLevel/humans/" + str(get_tree().get_network_unique_id()) + "/humanHUD/bulletHUD").set_frame(currentMagSize)
 	
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Keys"):
