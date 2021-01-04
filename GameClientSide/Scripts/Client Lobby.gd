@@ -7,7 +7,7 @@ var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
 var level #used for removing and changing maps
 var victoryScreen = preload("res://Scenes/victoryScreen.tscn")
-var playerHUD = preload("res://Scenes/humanHUD.tscn")
+var humanHUD = preload("res://Scenes/humanHUD.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -47,7 +47,7 @@ puppet func spawn_player(spawn_pos, id):
 	player.position = spawn_pos
 	player.name = String(id)
 	player.set_network_master(id)
-	
+	#if this client version "owns" the player, we need to add a camera, spawn keys, and add a HUD
 	if(id == get_tree().get_network_unique_id()):
 		Gamestate.isHuman = true
 		var camera = Camera2D.new()
@@ -56,7 +56,7 @@ puppet func spawn_player(spawn_pos, id):
 		player.add_child(camera)
 		#make keys if player controls side
 		get_node("/root/GameIntroLevel").rpc_id(1, "spawn_keys")
-		var hud = playerHUD.instance() #make hud for player
+		var hud = humanHUD.instance() #make hud for player
 		player.add_child(hud)
 	get_node("/root/GameIntroLevel/humans").add_child(player)
 

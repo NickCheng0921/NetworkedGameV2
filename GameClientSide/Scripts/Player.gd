@@ -50,6 +50,8 @@ func _process(delta):
 			canShoot = false
 			currentMagSize -= 1
 			shoot_cooldown() #tell server we shot so server can manage firing delay
+			#the network master version of each player has a HUD added to them in CLient Lobby.gd
+			#we can update the HUD locally in the player script whenever we shoot or take damage
 			if is_network_master():
 				get_node("/root/GameIntroLevel/humans/" + str(get_tree().get_network_unique_id()) + "/humanHUD/bulletHUD").set_frame(currentMagSize)
 		if Input.is_action_just_pressed("reload"):

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/HUD/creatureHPBar.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/HUD/creatureSwipeIcon.png" type="Texture" id=2]
+
+[node name="creatureHUD" type="CanvasLayer"]
+
+[node name="hpBar" type="Sprite" parent="."]
+position = Vector2( 1250, 50 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+vframes = 3
+frame = 2
+
+[node name="swipeHUD" type="Sprite" parent="."]
+position = Vector2( 175, 625 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 2 )
+vframes = 2
