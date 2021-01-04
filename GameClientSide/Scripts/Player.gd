@@ -119,6 +119,8 @@ remote func player_respawn(respawn_pos):
 	canMove = true
 	canShoot = true
 	isDead = false
+	if is_network_master():
+		get_node("/root/GameIntroLevel/humans/" + str(get_tree().get_network_unique_id()) + "/humanHUD/hpBar").set_frame(currHealth)
 	show()
 
 remotesync func playerShootSound():
