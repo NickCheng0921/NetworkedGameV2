@@ -55,10 +55,14 @@ func _process(delta):
 		if Input.is_action_pressed("ui_right"):
 			move_direction.x += 1
 		if Input.is_action_just_pressed("ui_shoot") and canShoot:
+			#when creature shoots: play sound locally, ask server to check for collision
+			#setup cool down timer, make swipe sprite on HUD "gray"
 			creatureSwipeSound()
 			rpc_unreliable_id(1, "creature_swipe")
 			swipe_cooldown()
 			canShoot = false
+			if is_network_master():
+				get_node("/root/GameIntroLevel/creatures/" + str(get_tree().get_network_unique_id()) + "/creatureHUD/swipeHUD").set_frame(1)
 		if(canMove):
 			velocity = move_direction.normalized()*MOVE_SPEED
 		else:
@@ -96,10 +100,14 @@ func swipe_cooldown():
 	swipeCooldownTimer.connect("timeout", self, "_swipeCooldownTimeout")
 	
 func _swipeCooldownTimeout():
+	#turn swipe image back to "color"
+	if is_network_master():
+		get_node("/root/GameIntroLevel/creatures/" + str(get_tree().get_network_unique_id()) + "/creatureHUD/swipeHUD").set_frame(0)
 	canShoot = true
 	
 func findPlayer():
-	#gets the first value, will work fine for a 2 player game
+	#gets the first human, will work fine for a 2 player game
+	#uncomment both if running only a creature and no player
 	canTrack = true
 	humanPlayer = get_node("/root/GameIntroLevel/humans").get_children()[0]
 	
@@ -108,7 +116,9 @@ remote func take_damage():
 		isGreen = true
 		modulate = Color(0,255,0)
 		currHealth -= meleeDamage
-		
+		if is_network_master():
+			get_node("/root/GameIntroLevel/creatures/" + str(get_tree().get_network_unique_id()) + "/creatureHUD/hpBar").set_frame(currHealth)
+			
 		if(currHealth <= 0):
 			rpc_id(1, "creature_died")
 			canShoot = false
@@ -119,8 +129,12 @@ remote func take_damage():
 			hide()
 
 remote func creature_respawn(respawn_pos):
+	#on Respawn: reset health, reset position, let creature move and shoot
+	#enable creature hurtbox, display creature
 	print("Creature Respawned")
 	currHealth = maxHealth
+	if is_network_master():
+		get_node("/root/GameIntroLevel/creatures/" + str(get_tree().get_network_unique_id()) + "/creatureHUD/hpBar").set_frame(currHealth)
 	position = respawn_pos
 	canMove = true
 	canShoot = true
