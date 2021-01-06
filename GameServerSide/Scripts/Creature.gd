@@ -21,14 +21,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position = puppet_pos
-	velocity = puppet_vel
 	global_rotation = look_dir
 	
-	var collision = move_and_collide(velocity*delta)
 	
-	puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
-	look_dir = global_rotation
+func _physics_process(delta):
+	position = puppet_pos
+	velocity = puppet_vel
+	move_and_slide(velocity)
 
 remote func creature_swipe():
 	sender_id = get_tree().get_rpc_sender_id()

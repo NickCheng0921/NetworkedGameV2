@@ -33,17 +33,8 @@ func _process(delta):
 			isGreen = false
 	#only move if we're the master of this player
 	if is_network_master():
-		var move_direction = Vector2()
 		var look_vec = get_global_mouse_position() - global_position
-		#movement
-		if Input.is_action_pressed("ui_up"):
-			move_direction.y -= 1
-		if Input.is_action_pressed("ui_down"):
-			move_direction.y += 1
-		if Input.is_action_pressed("ui_left"):
-			move_direction.x -= 1
-		if Input.is_action_pressed("ui_right"):
-			move_direction.x += 1
+		
 		if Input.is_action_just_pressed("ui_shoot") and canShoot and currentMagSize > 0:
 			rpc("playerShootSound")
 			rpc_unreliable_id(1, "player_shoot")
@@ -58,31 +49,38 @@ func _process(delta):
 			canShoot = false
 			rpc("reload")
 			
+		#aim at mouse
+		look_dir = atan2(look_vec.y, look_vec.x)
+		global_rotation = look_dir
+		
+		rset_unreliable("look_dir", look_dir)
+	else:
+		global_rotation = look_dir
+
+func _physics_process(delta):
+	var move_direction = Vector2()
+	#movement
+	if Input.is_action_pressed("ui_up"):
+		move_direction.y -= 1
+	if Input.is_action_pressed("ui_down"):
+		move_direction.y += 1
+	if Input.is_action_pressed("ui_left"):
+		move_direction.x -= 1
+	if Input.is_action_pressed("ui_right"):
+		move_direction.x += 1
+	if(is_network_master()):
 		if(canMove):
 			velocity = move_direction.normalized()*MOVE_SPEED
 		else:
 			velocity.x = 0
 			velocity.y = 0
-		
-		#aim at mouse
-		look_dir = atan2(look_vec.y, look_vec.x)
-		global_rotation = look_dir
-		
 		rset_unreliable("puppet_pos", position)
 		rset_unreliable("puppet_vel", velocity)
-		rset_unreliable("look_dir", look_dir)
-		
 	else: 
 		position = puppet_pos
 		velocity = puppet_vel
-		global_rotation = look_dir
-	
-	move_and_collide(velocity*delta)
-	
-	if not is_network_master():
-		puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
-		look_dir = global_rotation
-
+	move_and_slide(velocity)
+		
 func shoot_cooldown():
 	var shootCooldownTimer = Timer.new()
 	shootCooldownTimer.autostart = true
