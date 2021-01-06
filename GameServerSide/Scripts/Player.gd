@@ -19,14 +19,14 @@ func _ready():
 
 func _process(delta):
 	#no network master check because server owns no players
-	position = puppet_pos
-	velocity = puppet_vel
 	global_rotation = look_dir
 	
-	var collision = move_and_collide(velocity*delta)
-	
-	puppet_pos = position #reduces jitter if controlling player doesnt send inputs for a while
-	look_dir = global_rotation
+	#update movement in physics process rather than frame process
+
+func _physics_process(delta):
+	position = puppet_pos
+	velocity = puppet_vel
+	move_and_slide(velocity)
 
 remote func player_shoot():
 	sender_id = get_tree().get_rpc_sender_id()  
