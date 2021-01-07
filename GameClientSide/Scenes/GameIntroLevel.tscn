@@ -1,11 +1,12 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/GameIntroLevel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/mapTileSet.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/SPED.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/icon.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/redPng.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/a7o2dg5k.bmp" type="Texture" id=5]
 [ext_resource path="res://Scripts/key.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/greenPng.png" type="Texture" id=7]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -450,13 +451,13 @@ points = PoolVector2Array( 10.6061, 1.27478, 12.5351, 8.99081, 29.4139, 8.50858,
 6/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 30.48, 30.394 )
+extents = Vector2( 25.7896, 25.2537 )
 
 [sub_resource type="CanvasItemMaterial" id=20]
 blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 31.9994, 31.3659 )
+extents = Vector2( 25.1896, 25.0004 )
 
 [sub_resource type="Environment" id=22]
 background_mode = 4
@@ -492,8 +493,8 @@ tile_data = PoolIntArray( -720918, 2, 0, -720917, 4, 0, -720916, 1, 0, -720915, 
 
 [node name="lock" type="Sprite" parent="."]
 modulate = Color( 0.972549, 0, 0, 1 )
-position = Vector2( -3072.1, 656.415 )
-scale = Vector2( 1, 4.53553 )
+position = Vector2( -3079.83, 656.714 )
+scale = Vector2( 1, 5.74583 )
 texture = ExtResource( 4 )
 script = ExtResource( 6 )
 
@@ -510,9 +511,9 @@ shape = SubResource( 19 )
 modulate = Color( 0.00784314, 1, 0, 1 )
 self_modulate = Color( 0.823529, 0.721569, 0.721569, 1 )
 material = SubResource( 20 )
-position = Vector2( -3269.65, 646.07 )
-scale = Vector2( 3.13092, 2.92046 )
-texture = ExtResource( 4 )
+position = Vector2( -3271.43, 656.093 )
+scale = Vector2( 4.52072, 4.39044 )
+texture = ExtResource( 7 )
 script = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="SPED" groups=[

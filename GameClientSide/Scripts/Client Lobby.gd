@@ -1,7 +1,7 @@
 extends Node2D
 
-#const connectIP = "127.0.0.1"
-const connectIP = "34.94.217.163"
+const connectLocalIP = "127.0.0.1"
+const connectServerIP = "34.94.217.163"
 const connectPort = 44444;
 var Player = load("res://Scenes/Player.tscn")
 var Creature = load("res://Scenes/Creature.tscn")
@@ -15,12 +15,18 @@ func _ready():
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 	
-func _on_connectButton_pressed():
+func _on_connectLanButton_pressed():
 	print("Joining network")
 	var client = NetworkedMultiplayerENet.new()
-	client.create_client(connectIP, connectPort)
+	client.create_client(connectLocalIP, connectPort)
 	get_tree().set_network_peer(client)
 	
+func _on_connectServerButton_pressed():
+	print("Joining network")
+	var client = NetworkedMultiplayerENet.new()
+	client.create_client(connectServerIP, connectPort)
+	get_tree().set_network_peer(client)
+
 func _connected_ok():
 	$connectButton.hide()
 	$connectButton.disabled = true
