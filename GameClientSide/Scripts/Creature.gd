@@ -92,7 +92,6 @@ func _physics_process(delta):
 		velocity = puppet_vel
 	move_and_slide(velocity)
 
-
 func swipe_cooldown():
 	var swipeCooldownTimer = Timer.new()
 	swipeCooldownTimer.autostart = true

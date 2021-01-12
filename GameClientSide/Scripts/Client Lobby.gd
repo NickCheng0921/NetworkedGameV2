@@ -28,8 +28,10 @@ func _on_connectServerButton_pressed():
 	get_tree().set_network_peer(client)
 
 func _connected_ok():
-	$connectButton.hide()
-	$connectButton.disabled = true
+	$connectServerButton.hide()
+	$connectServerButton.disabled = true
+	$connectLanButton.hide()
+	$connectLanButton.disabled = true
 	print("Connection Successful")
 	
 func _connected_fail():
