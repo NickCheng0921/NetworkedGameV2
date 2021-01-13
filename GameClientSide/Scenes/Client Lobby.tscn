@@ -38,11 +38,23 @@ rotation = 2.04029
 scale = Vector2( 3, 3 )
 amount = 25
 lifetime = 4.0
+preprocess = 1.0
 speed_scale = 0.4
 explosiveness = 0.1
 randomness = 0.3
 spread = 10.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 100.0
+
+[node name="Instructions" type="Button" parent="."]
+margin_left = 966.0
+margin_top = 642.0
+margin_right = 1219.0
+margin_bottom = 697.0
+text = "Instructions"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="connectLanButton" to="." method="_on_connectLanButton_pressed"]
 [connection signal="pressed" from="connectServerButton" to="." method="_on_connectServerButton_pressed"]
+[connection signal="pressed" from="Instructions" to="." method="_on_Instructions_pressed"]

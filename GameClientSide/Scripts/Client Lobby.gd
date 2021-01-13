@@ -102,3 +102,6 @@ remote func gameOver(winCode):
 		get_node("/root/victoryScreen/creatureVictory").hide()
 		get_node("/root/victoryScreen/humanVictory").show()
 		
+		
+func _on_Instructions_pressed():
+	print("Instructions blah blah")
